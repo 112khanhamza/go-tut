@@ -5,7 +5,27 @@ import (
 	"strings"
 )
 
+func binarySearch(nums[]int, target int) {
+	var start int = 0
+	var end int = 0
+	var res int = -1
+
+	for start <= end {
+		var mid int = start + (end - start) / 2
+		if (nums[mid] == target) {
+			res = mid
+		} else if (nums[mid] > target) {
+			end = mid - 1
+		} else {
+			start = mid + 1
+		}
+	}
+
+	fmt.Println(res)
+}
+
 func main() {
+
 	conferenceName := "Go Conference"
 	const conferenceTickets = 50
 	var remainingTickets uint = 50
@@ -39,6 +59,12 @@ func main() {
 		fmt.Println("How many tickets do you want? ")
 		fmt.Scan(&userTickets)
 
+		// validate correct input
+		if userTickets > remainingTickets {
+			fmt.Printf("We only have %v tickets remaining, so you cannot book %v tickets.\n", remainingTickets, userTickets)
+			continue
+		}
+
 		remainingTickets = remainingTickets - userTickets
 
 		// array
@@ -63,7 +89,7 @@ func main() {
 			// end the program
 			fmt.Println("Our conference is booked out. Come back next year.")
 			break
-		}
+		} 
 	}
 
 }
